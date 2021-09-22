@@ -1,44 +1,105 @@
-import { FormControl, FormLabel, Input, Text } from "@chakra-ui/react";
-
+import { FormControl, FormLabel, Input, Text, Button, VStack, FormHelperText } from "@chakra-ui/react";
+import { Formik } from 'formik';
+import * as Yup from 'yup'
 
 function logIn() {
 
-  function validaNome(){
-    // função para validar o nome, caso a pessoa não digite
-    let nome_ = document.forms["name"].value;
-    if (nome_ == '' || nome_ in ['1, 2, 3, 4, 5, 6, 7, 8, 9, 0']){
-      alert('Digite o seu nome ou email para LogIn')
+  const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, 'Muito curto!')
+      .max(50, 'Muito longo!')
+      .required('Required'),
+    email: Yup.string()
+      .email('Email inválido')
+      .required('Required'),
+    password: Yup.string()
+      .min(6, 'Muito curta!')
+      .max(30, 'Muito longa!')
+      .required('Required'),
+  });
+
+  function validate(values) {
+    const errors = {};
+    if(!values.name){
+      errors.name = 'É obrigatório preencher seu nome';
     }
-      return false;
+    if(!values.email) {
+      errors.name = 'É obrigatório preencher seu email'
+    }
+    if(!values.password) {
+      errors.name = 'É obrigatório preencher sua senha'
+    }
+
+    return errors;
   }
 
   return <>
+      <Formik
+        initialValues={{
+          name: '', email: '', password: '',
+      }}
+      
+      validationSchema={SignupSchema}
+      onSubmit={values => {
+      }}
+      >
+        {({ errors, touched }) => (
 
-      <Text fontSize="xl" fontWeight="semibold" lineHeight="short">
-        Entre e veja as suas tarefas.
-      </Text>
-      <FormControl>
+      <VStack alignItems='center' spacing='10'>
 
-        <FormLabel for='name'>
-          Nome ou email
-        </FormLabel>
+        <Text fontSize="xl" fontWeight="semibold" lineHeight="short" mt='20'>
+          Entre e veja as suas tarefas.
+        </Text>
 
-        <Input 
-          type='email' 
-          onsubmit="validaNome()"
-          isRequired 
-        />
+      <FormControl id='nome' alignItems='center' autoComplete='off' >
+        <VStack>
+              <FormLabel for='name'>
+                Digite seu nome: 
+              </FormLabel>
+            
+              <Input for='name' maxW='30%' placeHolder='Seu nome completo' type='text' />
+        </VStack>
+      </FormControl>
 
-        <FormLabel 
-          for='senha'
-        >
-          Senha
-        </FormLabel>
+      <FormControl id='email' alignItems='center' autoComplete='off'>
+        <VStack>
+           
+              <FormLabel for='email' alignItems='center'>
+                E-mail:
+              </FormLabel>
 
-        <Input type='password' isRequired />
+              <Input type='email' placeHolder='Digite seu email'
+                maxW='30%' autoComplete='off' onSubmit={onSubmit} />
+
+        <FormHelperText>Digite seu melhor email.</FormHelperText>
+        </VStack>
+      </FormControl>
+
+      <FormControl id='senha' autoComplete='off'>
+        <VStack>
+          <FormLabel for='senha'>
+            Senha
+          </FormLabel>
+
+          <Input 
+            type='password' placeHolder='Digite sua senha'
+            maxW='30%' minLength='6'
+            pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,12}$'
+            title='A senha deve conter entre 6 e 12 carácteres, letras maiúsculas e minúsculas e um numeral'
+          />
+          <FormHelperText>Uma senha com letras maiúsculas e minúsculas, algum numeral e entre 6 e 12 carácteres.</FormHelperText>
+        </VStack>
 
       </FormControl>
-  
+
+      <Button mt='26' type="submit">
+        Enviar
+      </Button>
+
+      </VStack>
+
+      )}
+      </Formik>
   </>
 }
 
