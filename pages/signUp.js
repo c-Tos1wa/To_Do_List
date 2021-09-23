@@ -1,32 +1,79 @@
-import { Text, Box, Input,  VStack, FormControl, FormLabel, Container, Button, Link } from '@chakra-ui/react'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { 
+    Text,  
+    Input,  
+    VStack, 
+    FormControl, 
+    FormLabel, 
+    FormMessageError,
+    Button, 
+    Link 
+  } from '@chakra-ui/react'
+
+
 
 export default function SignUp (){
+const initialValues = {
+  name:'',
+  username:'',
+  email: '',
+  password:''
+}
+
+const validationSchema = yup.object().shape({
+  name: yup
+    .string()
+    .max(20, 'Nome de ve ter menos de 20 letras')
+    .required("Este campo é obrigatório!"),
+  username: yup
+    .string()
+    .min(2)
+    .required('Este campo é obrigatório'),
+  email: yup
+    .string()
+    .email()
+    .required('Email é obrigatório'),
+  password: yup
+    .string()
+    .required('Entre com uma senha')
+    .matches(/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+    'A senha deve conter no minimo 8 dígitos com letras maiúsculas e minúsculas e um caracter especial'
+    ),
+})
+
+
+
+
+
  return (
    <>
      <VStack 
-        bgColor='brand.500'
+        //bgColor='brand.500'
         alignItems='center' 
-        justifyContent='center'
-        p='12'
+        p='5'
       >
         <Text 
           mb='5'
-          fontSize='xl'
+          fontSize='3xl'
           fontWeight='bold'
-          textShadow='1px 1px #ffffff'
+          textShadow='1px 1px #F0FFFF'
         >
           Crie sua conta
         </Text>
         <VStack 
-          bgColor='gray.50' 
-          borderWidth='1px' borderRadius='5' p='5'>
+          bgColor='#F0FFFF' 
+          borderWidth='1px' 
+          borderRadius='5' 
+          p='5'>
           <FormControl id='name'>
             <FormLabel>
               Nome
             </FormLabel>
             <Input 
               type='text'
-              placeholder='Digite seu nome'
+              placeholder='nome_completo'
+              variant='flushed'
               size='lg' 
             />
           </FormControl>
@@ -36,7 +83,8 @@ export default function SignUp (){
             </FormLabel>
             <Input
               type='text'
-              placeholder='Digite um username'
+              placeholder='username'
+              variant='flushed'
               size='lg'
             />
           </FormControl>
@@ -46,7 +94,8 @@ export default function SignUp (){
             </FormLabel>
             <Input
               type='email'
-              placeholder='Digite seu email'
+              placeholder='teste@teste.com.br'
+              variant='flushed'
               size='lg'
             />
           </FormControl>
@@ -56,7 +105,8 @@ export default function SignUp (){
             </FormLabel>
             <Input
               type='password'
-              placeholder='Digite uma senha'
+              placeholder='************'
+              variant='flushed'
               size='lg'
             />
           </FormControl>
@@ -74,13 +124,14 @@ export default function SignUp (){
               CRIAR 
           </Button>
         </VStack>
-        <Text
-          m='4'
-        >
-          Se tiver uma conta, clique aqui.
-        </Text>
+          <Text
+            m='4'
+          >
+            Se tiver uma conta, clique aqui.
+          </Text>
    </VStack>
 
    </>
  ) 
-}
+} 
+
