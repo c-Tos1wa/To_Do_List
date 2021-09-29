@@ -1,5 +1,6 @@
-import { Image, Button, VStack, HStack,Text } from '@chakra-ui/react';
+import { Image, Button, VStack, HStack,Text, Box } from '@chakra-ui/react';
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -8,19 +9,44 @@ export default function Home() {
       <title>Agenda</title>
       <meta name="description" content="" />
     </Head>
-    <VStack>
-      <Text 
-        mt='5'
-        fontSize='xl'>
+    <VStack mt='5' mb='5'>
+      <Text
+        fontSize='xl'
+        fontWeight='bold'
+      >
         Organize seu dia-a-dia com a Agenda
       </Text>
       <Image 
-        src='./checkList.png' 
-        alt='Imagem de várias pessoas organizando suas tarefas' 
+        src='./checkList2.png' 
+        alt='Imagem de várias pessoas organizando suas tarefas'
       />
       <HStack spacing='5' align='center'>
-        <Button backgroundColor='brand.600'>Login</Button>
-        <Button backgroundColor='brand.600'>Cadastre-se</Button>
+        <Box>
+          
+          <Button 
+            bgColor='brand.600'
+            size='md'
+            _hover={{
+              bgColor:'brand.800',
+              color: 'gray.50'
+            }}
+          >CADASTRE-SE
+          </Button>
+          
+        </Box>
+        <Link href='./login'>
+          <Button 
+            backgroundColor='brand.600'
+            _hover={{
+              bgColor:'brand.800',
+              color: 'gray.50'
+            }}
+            /*onClick={ () => 
+              signIn()
+            }*/
+          >LOGIN
+          </Button>
+        </Link>
       </HStack>
     </VStack>
     </>
