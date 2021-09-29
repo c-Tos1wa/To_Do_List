@@ -116,11 +116,11 @@ export default function SignUp() {
               >
                 CRIAR
               </Button>
-
+                <Link href='./login'>
               <Text>
-                Se tiver uma conta, clique aqui
+                <a>Se tiver uma conta, clique aqui</a>
               </Text>
-
+                </Link>
                </VStack>
 
              </form>

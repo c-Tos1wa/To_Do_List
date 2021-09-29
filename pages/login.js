@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { FormControl, FormLabel, Input, Heading, Button, VStack } from "@chakra-ui/react";
+import { Link, Text, Input, Heading, Button, VStack } from "@chakra-ui/react";
 
  
  const Basic = () => (
@@ -85,8 +85,13 @@ import { FormControl, FormLabel, Input, Heading, Button, VStack } from "@chakra-
            borderColor="brand.800" type="submit" variant="outline" disabled={isSubmitting} 
            _hover='gray.200'
            >
-             Cadastrar
+             Entrar
            </Button>
+           <Text>
+             <Link href='./signUp'>
+              <a>Clique aqui se ainda não tiver uma conta.</a>
+             </Link>
+            </Text>
           </VStack>
          </form>
        )}
