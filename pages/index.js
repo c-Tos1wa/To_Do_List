@@ -22,7 +22,7 @@ export default function Home() {
       />
       <HStack spacing='5' align='center'>
         <Box>
-          
+          <Link href='./signUp'>
           <Button 
             bgColor='brand.600'
             size='md'
@@ -32,7 +32,7 @@ export default function Home() {
             }}
           >CADASTRE-SE
           </Button>
-          
+          </Link>
         </Box>
         <Link href='./login'>
           <Button 

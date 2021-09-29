@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import { Input, Text, VStack, Button, FormErrorMessage, FormControl } from '@chakra-ui/react'
+import { Input, Text, VStack, Button, FormErrorMessage, Link } from '@chakra-ui/react'
 
 export default function SignUp() {
   return (
