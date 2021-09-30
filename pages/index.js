@@ -1,4 +1,4 @@
-import { Image, Button, VStack, HStack,Text, Box } from '@chakra-ui/react';
+import { Image, Button, VStack, HStack,Text, Box, Flex } from '@chakra-ui/react';
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -9,9 +9,10 @@ export default function Home() {
       <title>Agenda</title>
       <meta name="description" content="" />
     </Head>
-    <VStack mt='5' mb='5'>
+    <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' justifyContent='center' alignItems='center' > 
+    <VStack mt='1' mb='5' >
       <Text
-        fontSize='xl'
+        fontSize='2xl'
         fontWeight='bold'
       >
         Organize seu dia-a-dia com a Agenda
@@ -49,6 +50,7 @@ export default function Home() {
         </Link>
       </HStack>
     </VStack>
+    </Flex>
     </>
   )
 }
