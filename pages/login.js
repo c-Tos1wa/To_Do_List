@@ -1,13 +1,14 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { FormControl, FormLabel, Input, Heading, Button, VStack } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Heading, Button, VStack, Divider, Box } from "@chakra-ui/react";
 
  
  const Basic = () => (
    <div>
-    <VStack spacing='1.5rem' >
+    
+    <VStack spacing='1.5rem' bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' height='100vh' spacing='2.5' flexDirection='column' w=''>
 
-     <Heading mt='40px' fontSize="4xl" fontWeight="semibold" lineHeight="short">
+     <Heading mt='40px' fontSize="4xl" fontWeight="semibold" lineHeight="short" mb='50' padding='7'>
        Entre e veja as suas tarefas
       </Heading>
      
@@ -47,9 +48,12 @@ import { FormControl, FormLabel, Input, Heading, Button, VStack } from "@chakra-
        
        <form onSubmit={handleSubmit}>    {/* // começo do form  */}
           
-          <VStack spacing='2rem'>
+          <Box bg='gray.100'>
+
+          <VStack spacing='2rem' >
 
             <Input
+             variant="subtle"
              type="name"
              name="name"
              onChange={handleChange}
@@ -61,6 +65,7 @@ import { FormControl, FormLabel, Input, Heading, Button, VStack } from "@chakra-
            {errors.name && touched.name && errors.name}
            
            <Input
+             variant="subtle"
              type="email"
              name="email"
              onChange={handleChange}
@@ -71,7 +76,9 @@ import { FormControl, FormLabel, Input, Heading, Button, VStack } from "@chakra-
            />
            
            {errors.email && touched.email && errors.email}
+           
            <Input
+             variant="subtle"
              type="password"
              name="password"
              onChange={handleChange}
@@ -79,15 +86,20 @@ import { FormControl, FormLabel, Input, Heading, Button, VStack } from "@chakra-
              value={values.password}
              size="lg"
              placeholder='E agora sua senha'
-           />
+            />
            {errors.password && touched.password && errors.password}
-           <Button height="48px" border="2px" color='brand.800' 
+           
+           <Divider />
+
+           <Button height="48px" border="2px" colorScheme='brand.800' variant="subtle"
            borderColor="brand.800" type="submit" variant="outline" disabled={isSubmitting} 
            _hover='gray.200'
            >
              Cadastrar
            </Button>
-          </VStack>
+
+           </VStack>
+           </Box>
          </form>
        )}
      </Formik>

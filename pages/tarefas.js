@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Text, Button, Form, Input } from '@chakra-ui/react';
+import Navbar from '../components/Navbar';
 
 // https://www.youtube.com/watch?v=iEN3SAM3LbA&ab_channel=TravisWilliams
 const index = () => {
@@ -34,6 +35,7 @@ const index = () => {
     return (
       <>
               <Text>Hora de organizar suas tarefas</Text>
+              <Navbar />
               <Form>
                 <Input type='text' value={userInput} onChange={handleChange} placeholder='Adicione uma tarefa' />
                 <Button onClick={handleSubmit}>Cadastrar</Button>

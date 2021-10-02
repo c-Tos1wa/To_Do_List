@@ -1,9 +1,10 @@
 import { Formik } from 'formik'
-import { Input, Text, VStack, Button, FormErrorMessage, FormControl } from '@chakra-ui/react'
+import { Input, Text, VStack, Button, FormErrorMessage, FormControl, Flex } from '@chakra-ui/react'
 
 export default function SignUp() {
   return (
     <>
+     
       <Text
         textAlign='center'
         mt='5'
@@ -14,7 +15,7 @@ export default function SignUp() {
         Crie sua conta
       </Text>
 
-      <VStack justifyContent='center' alignItems='center' my='5'>
+      <VStack justifyContent='center' alignItems='center' my='5' >
       <Formik
         initialValues={{
           name: '',
@@ -127,6 +128,7 @@ export default function SignUp() {
            )}
          </Formik>
          </VStack>
+         
     </>
   )
 }
