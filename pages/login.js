@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Link, Text, Input, Heading, Button, VStack } from "@chakra-ui/react";
+import { Link, Text, Input, Heading, Button, VStack, Flex } from "@chakra-ui/react";
 
 
 const Basic = () => (
