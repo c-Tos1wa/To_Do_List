@@ -31,14 +31,29 @@ const index = () => {
 
   return (
     <>
-      <Text>Hora de organizar suas tarefas</Text>
-      <Input type='text' value={userInput} onChange={handleChange} placeholder='Adicione uma tarefa' />
-      <Button onClick={handleSubmit}>Adicionar</Button>
+      <Text textAlign='center' m='5' fontSize='2xl'>
+        Hora de organizar suas tarefas
+      </Text>
+      <Input 
+        type='text' 
+        placeholder='Adicione uma tarefa' 
+        variant='flushed'
+        my='3' p='5'
+        value={userInput} 
+        onChange={handleChange} 
+      />
+      <Button
+        variant='outline'
+        mx='5' p='5' 
+        onClick={handleSubmit}
+      >
+        Adicionar</Button>
       <ul>
         {
           todoList.length >= 1 ? todoList.map((todo, idx) => {
 
-            return <li key={idx}>{todo}<Button onClick={(e) => {
+            return <li key={idx}>{todo}<Button variant='outline'
+            mx='10' p='5' onClick={(e) => {
               e.preventDefault()
               handleDelete(todo)
             }}>Apagar</Button></li>
