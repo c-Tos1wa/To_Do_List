@@ -64,7 +64,7 @@ export default function SignUp() {
                   placeholder='Digite seu nome completo'
                   variant='flushed'
                   size= 'lg'
-                />
+                 />
                 <Text>{errors.name}</Text>
                 <Input
                   name='username'
@@ -113,9 +113,9 @@ export default function SignUp() {
                   bgColor: 'gray.50',
                   color: 'brand.700'
                 }}
-              >
+                >
                 CRIAR
-              </Button>
+                </Button>
                 
               <Text>
                 <a href='./login'>Se tiver uma conta, clique aqui</a>

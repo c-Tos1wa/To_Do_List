@@ -41,7 +41,6 @@ const Basic = () => (
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
 
 
