@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Link, Text, Input, Heading, Button, VStack, Flex } from "@chakra-ui/react";
+import { Text, Input, Heading, Button, VStack } from "@chakra-ui/react";
 
 
 const Basic = () => (
@@ -18,7 +18,7 @@ const Basic = () => (
           if (!values.name) {
             errors.name = 'Required';
           } else if (!values.email) {
-            errors.email = 'Required';
+            errors.password = 'Required';
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
@@ -44,7 +44,7 @@ const Basic = () => (
         }) => (
 
 
-          <form onSubmit={handleSubmit}>    {/* // começo do form  */}
+          <form onSubmit={handleSubmit}>    
 
             <VStack spacing='2rem'>
 

@@ -11,7 +11,6 @@ export default NextAuth({
     Providers.token({
       nameId: process.env.TOKEN_ID,
 
-
     })
   ]
 })
