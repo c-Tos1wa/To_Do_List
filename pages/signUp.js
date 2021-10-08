@@ -1,7 +1,17 @@
+import React from "react";
 import { Formik } from 'formik'
-import { Input, Text, VStack, Button, FormErrorMessage, Link } from '@chakra-ui/react'
+import { Input, Text, VStack, Button } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 export default function SignUp() {
+  
+  const router = useRouter();
+  
+  const [error, setError] = React.useState(false);
+
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   return (
     <>
       <Text
@@ -18,6 +28,7 @@ export default function SignUp() {
       <Formik
         initialValues={{
           name: '',
+          surname: '',
           username: '',
           email: '',
           password: ''
@@ -27,6 +38,8 @@ export default function SignUp() {
             console.log(errors)
            if(!values.name){
              errors.name = 'Nome é obrigatório.'
+           }if(!values.surname){
+             errors.surname = 'Sobrenome é obrigatório'
            }if (!values.username){
              errors.username = 'Nome de usuário é obrigatório'
            } if (!values.email){
@@ -38,20 +51,31 @@ export default function SignUp() {
            }
            if (!values.password){
              errors.password = 'Senha é obrigatória'
-           } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.password)) {
+          //  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.password)) {
              errors.password = 'Senha inváida. Tente com um caracter especial'
            }
            return errors
          }}
-         onSubmit={(values, actions) => {
-           setTimeout(() => {
-             alert(JSON.stringify(values, null, 2))
-             actions.setSubmitting(false)
-           }, 1000)
-         }}>
+
+         onSubmit = { async e => {
+          e.preventDefault();
+          const { username, email, password } = this.state;
+          if (!username || !email || !password) {
+            this.setState({ error: "Preencha todos os dados para se cadastrar" });
+          } else {
+            try {
+              await api.post("/users", { username, email, password });
+              this.props.history.push("/");
+            } catch (err) {
+              console.log(err);
+              this.setState({ error: "Ocorreu um erro ao registrar sua conta. T.T" });
+            }
+          }
+        }} >
            {({ 
              values, errors, touched, handleChange, handleBlur, handleSubmit
            }) => (
+             
              <form onSubmit={handleSubmit}>
                <VStack spacing='5' alignItems='center' justifyContent='center'>
                  
@@ -61,11 +85,24 @@ export default function SignUp() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.name}
-                  placeholder='Digite seu nome completo'
+                  placeholder='Digite seu nome'
                   variant='flushed'
                   size= 'lg'
-                />
+                 />
                 <Text>{errors.name}</Text>
+
+                <Input
+                  name='surname'
+                  type='text'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.surname}
+                  placeholder='Digite seu sobrenome'
+                  variant='flushed'
+                  size= 'lg'
+                 />
+                <Text>{errors.surname}</Text>
+
                 <Input
                   name='username'
                   type='text'
@@ -103,19 +140,19 @@ export default function SignUp() {
                 <Text>{errors.password}</Text>
 
                 <Button
-                type='submit'
-                mt='5'
-                p='3'
-                bgColor='brand.700'
-                color='gray.50'
-                borderRadius='5'
-                _hover={{
-                  bgColor: 'gray.50',
-                  color: 'brand.700'
-                }}
-              >
+                  type='submit'
+                  mt='5'
+                  p='3'
+                  bgColor='brand.700'
+                  color='gray.50'
+                  borderRadius='5'
+                  _hover={{
+                    bgColor: 'gray.50',
+                    color: 'brand.700'
+                  }}
+                >
                 CRIAR
-              </Button>
+                </Button>
                 
               <Text>
                 <a href='./login'>Se tiver uma conta, clique aqui</a>
