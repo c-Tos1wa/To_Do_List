@@ -2,15 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-  "/home": "pages/home.js",
-  "/login": "pages/login.js"
-=======
-<<<<<<< HEAD
-  "/home": "pages/home.js"
-=======
+  "/login": "pages/login.js",
   "/": "pages/index.js",
-  "/signUp": "pages/signUp.js"
->>>>>>> d46e0c2a1935d60a49e2a1d45eaa5b7003d15b40
->>>>>>> 559a71dd8b9fdae1e31610476ca6ca84978ab7ef
+  "/home": "pages/home.js"
 }
