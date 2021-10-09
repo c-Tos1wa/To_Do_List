@@ -2,7 +2,7 @@ import axios from "axios";
 //import { getToken } from "./[...nextAuth]";
 
 const api = axios.create({
-  beaseURL: "https://projetotarefa2.azurewebsites.net/"
+  baseURL: "https://projetotarefa2.azurewebsites.net/"
 })
 
 export const signup = (username, password) => {  // endpoint do registro
