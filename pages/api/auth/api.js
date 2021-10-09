@@ -1,23 +1,44 @@
 import axios from "axios";
 //import { getToken } from "./[...nextAuth]";
 
-const api = axios.create({
-  beaseURL: "https://projetotarefa2.azurewebsites.net/"
-})
+// const api = axios.create({
+//   baseUrL: "https://projetotarefa2.azurewebsites.net/"
+// })
 
-export const signup = (username, password) => {  // endpoint do registro
+const baseUrl = "https://projetotarefa2.azurewebsites.net"
+
+export const signup = async (userName, email, passwordHash, name, lastName) => {  // endpoint do registro
   return await axios.post(baseUrl + "/api/v1/Auth/Register", {
-    username,
-    password,
+    userName,
+    email,
+    passwordHash,
+    name,
+    lastName,
   });
 };
 
-export const login = async (username, password) => {
-  return await axios.post(baseUrl + "/api/v1/Auth/Token", {
-    username,
-    password
-  });
-};
+// export const login = async (userName, email, passwordHash) => {
+//   return await axios.post(baseUrl + "/api/v1/Auth/Token", {
+//     userName,
+//     email,
+//     passwordHash
+//   });
+// };
+
+export const login = async (userName, email, passwordHash) => {
+  return await axios.post(baseUrl + '/api/v1/Auth/Token', {userName, email, passwordHash}, {
+    auth: {
+        userName,
+        email,
+        passwordHash
+      } 
+    })
+    .then((response) => {
+     
+      localStorage.setItem('token', JSON.stringify(response.data));
+     
+    });
+}
 
 export const createTask = async(id, description) => {
   return await axios.post(baseUrl + '/api/v1/TaskController/CreateTask', {
@@ -61,5 +82,3 @@ export const deleteTask = async(id) => {
     id
   });
 };
-
-export default api;
