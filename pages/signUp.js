@@ -1,12 +1,24 @@
+import React from "react";
 import { Formik } from 'formik'
-import { Input, Text, VStack, Button, FormErrorMessage, Link } from '@chakra-ui/react'
+import { Input, Text, VStack, Button, Flex } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { signup } from "./api/auth/api";
 
 export default function SignUp() {
+  
+  const router = useRouter();
+  const [error, setError] = React.useState(false);
+  // const [userName, setUsername] = React.useState("");
+  // const [email, setEmail] = React.useState(""); 
+  // const [passwordHash, setPasswordHash] = React.useState("");
+  // const [name, setName] = React.useState("");
+  // const [lastName, setLastName] = React.useState("");
+
   return (
     <>
       <Text
+        bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' 
         textAlign='center'
-        mt='5'
         fontSize='2xl'
         fontWeight='bold'
         textShadow='1px 1px #F0FFFF'
@@ -14,21 +26,26 @@ export default function SignUp() {
         Crie sua conta
       </Text>
 
+      <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' alignItems='center' justifyContent='center'> 
+
       <VStack justifyContent='center' alignItems='center' my='5'>
       <Formik
         initialValues={{
-          name: '',
-          username: '',
+          userName: '',
           email: '',
-          password: ''
+          passwordHash: '',
+          name: '',
+          lastName: ''
          }}
          validate= { values => {
            const errors = {}
             console.log(errors)
            if(!values.name){
              errors.name = 'Nome é obrigatório.'
-           }if (!values.username){
-             errors.username = 'Nome de usuário é obrigatório'
+           }if(!values.lastName){
+             errors.lastName = 'Sobrenome é obrigatório'
+           }if (!values.userName){
+             errors.userName = 'Nome de usuário é obrigatório'
            } if (!values.email){
              errors.email = 'Email é obrigatório'
            } else if (
@@ -36,86 +53,119 @@ export default function SignUp() {
            ) {
              errors.email = 'Email inválido'
            }
-           if (!values.password){
-             errors.password = 'Senha é obrigatória'
-           } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.password)) {
-             errors.password = 'Senha inváida. Tente com um caracter especial'
+           if (!values.passwordHash){
+             errors.passwordHash = 'Senha é obrigatória'
+          //  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.password)) {
+             errors.passwordHash = 'Senha inváida. Tente com um caracter especial'
            }
            return errors
          }}
-         onSubmit={(values, actions) => {
-           setTimeout(() => {
-             alert(JSON.stringify(values, null, 2))
-             actions.setSubmitting(false)
-           }, 1000)
-         }}>
+
+         onSubmit = { async (values) => {
+          try{
+            await signup(
+              values.userName,
+              values.email, 
+              values.passwordHash,
+              values.name,
+              values.lastName
+            );
+            router.push("/home");
+          } catch (err) {
+            console.error(err);
+            setError(true);
+          }
+        }
+        } >
            {({ 
-             values, errors, touched, handleChange, handleBlur, handleSubmit
+             values, errors, handleChange, handleBlur, handleSubmit
            }) => (
-             <form onSubmit={handleSubmit}>
+             
+            <form onSubmit={ (e) => {
+              e.preventDefault();
+              handleSubmit(e)
+             }}
+             >
                <VStack spacing='5' alignItems='center' justifyContent='center'>
                  
                  <Input
+                  focusBorderColor="lime"
                   name='name'
                   type='text'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.name}
-                  placeholder='Digite seu nome completo'
-                  variant='flushed'
+                  placeholder='Digite seu nome'
+                  variant="outline"
                   size= 'lg'
-                />
+                 />
                 <Text>{errors.name}</Text>
+
                 <Input
-                  name='username'
+                  focusBorderColor="lime"
+                  name='lastName'
                   type='text'
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.username}
-                  placeholder='Digite seu nome de usuário'
-                  variant='flushed'
+                  value={values.lastName}
+                  placeholder='Digite seu sobrenome'
+                  variant="outline"
                   size= 'lg'
-                />
-                <Text>{errors.username}</Text>
+                 />
+                <Text>{errors.lastName}</Text>
 
                 <Input
+                  focusBorderColor="lime"
+                  name='userName'
+                  type='text'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.userName}
+                  placeholder='Digite seu nome de usuário'
+                  variant="outline"
+                  size= 'lg'
+                />
+                <Text>{errors.userName}</Text>
+
+                <Input
+                  focusBorderColor="lime"
                   name='email'
                   type='email'
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={ values.email}
+                  value={values.email}
                   placeholder='Digite seu email'
-                  variant='flushed'
+                  variant="outline"
                   size= 'lg'
                 />
                 <Text>{errors.email}</Text>
 
                 <Input
-                  name='password'
+                  focusBorderColor="lime"
+                  name='passwordHash'
                   type='password'
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={ values.password}
+                  value={ values.passwordHash}
                   placeholder='Digite uma senha'
-                  variant='flushed'
+                  variant="outline"
                   size= 'lg'
                 />
-                <Text>{errors.password}</Text>
+                <Text>{errors.passwordHash}</Text>
 
                 <Button
-                type='submit'
-                mt='5'
-                p='3'
-                bgColor='brand.700'
-                color='gray.50'
-                borderRadius='5'
-                _hover={{
-                  bgColor: 'gray.50',
-                  color: 'brand.700'
-                }}
-              >
+                  type='submit'
+                  mt='5' p='3'
+                  bgColor='brand.700'
+                  color='gray.50'
+                  borderRadius='5'
+                  _hover={{
+                    bgColor: 'gray.50',
+                    color: 'brand.700'
+                  }}
+                >
                 CRIAR
-              </Button>
+                </Button>
                 
               <Text>
                 <a href='./login'>Se tiver uma conta, clique aqui</a>
@@ -127,6 +177,7 @@ export default function SignUp() {
            )}
          </Formik>
          </VStack>
+         </Flex>
     </>
   )
 }
