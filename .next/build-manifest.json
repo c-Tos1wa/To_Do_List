@@ -14,11 +14,6 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -29,10 +24,17 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+<<<<<<< HEAD
+    "/home": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/home.js"
+=======
     "/signUp": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/signUp.js"
+>>>>>>> d46e0c2a1935d60a49e2a1d45eaa5b7003d15b40
     ]
   },
   "ampFirstPages": []
