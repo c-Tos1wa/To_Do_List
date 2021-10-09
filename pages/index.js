@@ -2,6 +2,7 @@ import { Image, Button, VStack, HStack,Text, Box, Flex } from '@chakra-ui/react'
 import Head from 'next/head'
 import Link from 'next/link'
 
+
 export default function Home() {
   return (
     <>
@@ -42,9 +43,7 @@ export default function Home() {
               bgColor:'brand.800',
               color: 'gray.50'
             }}
-            /*onClick={ () => 
-              signIn()
-            }*/
+           
           >LOGIN
           </Button>
         </Link>
