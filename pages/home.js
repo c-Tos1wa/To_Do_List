@@ -54,15 +54,20 @@ const index = () => {
       </VStack>
 
       <VStack alignItems='center' spacing='6' marginTop='6'>
-        <Stack direction='row' >
+        
           <Wrap>
 
 
-            <ul>
+            <Stack direction='column' >
               {
                 todoList.length >= 1 ? todoList.map((todo, idx) => {
-                  return <li key={idx}>{todo}
+                  return <li key={idx}>{todo}<Checkbox colorSchema='red' ml='5'>Concluído</Checkbox>
                     <WrapItem alignItems='center' justifyContent='space-around'>
+                      <Select mt='6' placeholder="Prioridade" size="md" variant="outline" mb='4' mr='2.5'>
+                        <option value="option1">Alta</option>
+                        <option value="option2">Média</option>
+                        <option value="option3">Grande</option>
+                      </Select>
                       <Button variant='outline' _hover={{
                         bgColor: 'gray.50',
                         color: 'brand.700'
@@ -74,24 +79,19 @@ const index = () => {
                         }}>Apagar</Button>
                     
                    
-                      <Select mt='6' placeholder="Prioridade" size="md" variant="outline" mb='4' mr='2.5'>
-                        <option value="option1">Alta</option>
-                        <option value="option2">Média</option>
-                        <option value="option3">Grande</option>
-                      </Select>
-                      <Checkbox colorScheme="red">Concluído</Checkbox>
+                      
                       </WrapItem>
                     
                   </li>
 
                 })
-                  : 'Registre uma tarefa'
+                  :  'Registre uma tarefa'
               }
-            </ul>
+            </Stack>
 
 
           </Wrap>
-        </Stack>
+      
       </VStack>
 
     </>
