@@ -1,17 +1,6 @@
 # Todo List
 
-> Projeto do módulo 6 da Blue edtech: Uma todo list com login do usuário
-
-
-### Ajustes e melhorias
-
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
-
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+> Projeto do módulo 6 da Blue edtech: Uma todo list com login do usuário.
 
 ## 💻 Pré-requisitos
 
@@ -21,18 +10,18 @@ Você instalou a versão mais recente de <Yarn / Node>
 Você adicionou as seguintes bibliotecas <Axios / chakra-ui>.
 Você leu o <passo_a_passo_de_intalação_do_projeto>.
 
-## 🚀 Instalando a <Todo List>
+## 🚀 Instalando a `<Todo List>`
 
-Para instalar a <Todo list>, siga estas etapas:
+Para instalar a `<Todo list>`, siga estas etapas:
 
 ```
 <comando_de_instalação>
 git clone https://github.com/c-Tos1wa/To_Do_List.git
 ```
 
-## ☕ Usando <todo list>
+## ☕ Usando `<todo list>`
 
-Para usar <todo list>, siga estas etapas:
+Para usar `<todo list>`, siga estas etapas:
 
 ```
 <Iniciando a aplicação>
