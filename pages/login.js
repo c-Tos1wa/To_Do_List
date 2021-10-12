@@ -10,120 +10,128 @@ export default function Login() {
   const [error, setError] = React.useState(false);
 
   return (
-    <>
 
-      <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' alignItems='center' justifyContent='center'>
 
-        <VStack justifyContent='center' alignItems='center' my='5'>
-          <Formik
-            initialValues={{
-              userName: '',
-              email: '',
-              passwordHash: '',
-            }}
-            validate={values => {
-              const errors = {}
-              if (!values.userName) {
-                errors.userName = 'Nome de usuário é obrigatório'
-              } if (!values.email) {
-                errors.email = 'Email é obrigatório'
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              ) {
-                errors.email = 'Email inválido'
-              }
-              if (!values.passwordHash) {
-                errors.passwordHash = 'Senha é obrigatória'
-              }
-              return errors
-            }}
+    <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' alignItems='center' justifyContent='center' minHeight='100vh'>
 
-            onSubmit={async (values) => {
-              try {
-                await login(
-                  values.userName,
-                  values.email,
-                  values.passwordHash,
-                );
-                router.push("/home");
-              } catch (err) {
-                console.error(err);
-                setError(true);
-              }
+      <VStack justifyContent='center' alignItems='center' my='5' >
+        <Formik
+          initialValues={{
+            userName: '',
+            email: '',
+            passwordHash: '',
+          }}
+          validate={values => {
+            const errors = {}
+            if (!values.userName) {
+              errors.userName = 'Nome de usuário é obrigatório'
+            } if (!values.email) {
+              errors.email = 'Email é obrigatório'
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+              errors.email = 'Email inválido'
             }
-            } >
-            {({
-              values, errors, handleChange, handleBlur, handleSubmit
-            }) => (
+            if (!values.passwordHash) {
+              errors.passwordHash = 'Senha é obrigatória'
+            }
+            return errors
+          }}
 
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit(e)
-              }}
-              >
-                <VStack spacing='5' alignItems='center' justifyContent='center'>
+          onSubmit={async (values) => {
+            try {
+              await login(
+                values.userName,
+                values.email,
+                values.passwordHash,
+              );
+              router.push("/home");
+            } catch (err) {
+              console.error(err);
+              setError(true);
+            }
+          }
+          } >
+          {({
+            values, errors, handleChange, handleBlur, handleSubmit
+          }) => (
 
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit(e)
+            }}
+            >
+              <VStack spacing='5' alignItems='center' justifyContent='center'>
+                <Text
 
-                  <Input
-                    focusBorderColor="lime"
-                    name='userName'
-                    type='text'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.userName}
-                    placeholder='Digite seu nome de usuário'
-                    variant="outline"
-                    size='lg'
-                  />
-                  <Text>{errors.userName}</Text>
+                  textAlign='center'
+                  fontSize='2xl'
+                  fontWeight='bold'
+                  textShadow='1px 1px #F0FFFF'
+                >
+                  Faça seu Log in
+                </Text>
 
-                  <Input
-                    focusBorderColor="lime"
-                    name='email'
-                    type='email'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    placeholder='Digite seu email'
-                    variant="outline"
-                    size='lg'
-                  />
-                  <Text>{errors.email}</Text>
+                <Input
+                  focusBorderColor="lime"
+                  name='userName'
+                  type='text'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.userName}
+                  placeholder='Digite seu nome de usuário'
+                  variant="outline"
+                  size='lg'
+                />
+                <Text>{errors.userName}</Text>
 
-                  <Input
-                    focusBorderColor="lime"
-                    name='passwordHash'
-                    type='password'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.passwordHash}
-                    placeholder='Digite uma senha'
-                    variant="outline"
-                    size='lg'
-                  />
-                  <Text>{errors.passwordHash}</Text>
+                <Input
+                  focusBorderColor="lime"
+                  name='email'
+                  type='email'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  placeholder='Digite seu email'
+                  variant="outline"
+                  size='lg'
+                />
+                <Text>{errors.email}</Text>
 
-                  <Button
-                    type='submit'
-                    mt='5' p='3'
-                    bgColor='brand.700'
-                    color='gray.50'
-                    borderRadius='5'
-                    _hover={{
-                      bgColor: 'gray.50',
-                      color: 'brand.700'
-                    }}
-                  >
-                    LOG IN
-                  </Button>
+                <Input
+                  focusBorderColor="lime"
+                  name='passwordHash'
+                  type='password'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.passwordHash}
+                  placeholder='Digite uma senha'
+                  variant="outline"
+                  size='lg'
+                />
+                <Text>{errors.passwordHash}</Text>
 
-                </VStack>
+                <Button
+                  type='submit'
+                  mt='5' p='3'
+                  bgColor='brand.700'
+                  color='gray.50'
+                  borderRadius='5'
+                  _hover={{
+                    bgColor: 'gray.50',
+                    color: 'brand.700'
+                  }}
+                >
+                  LOG IN
+                </Button>
 
-              </form>
-            )}
-          </Formik>
-        </VStack>
-      </Flex>
-    </>
+              </VStack>
+
+            </form>
+          )}
+        </Formik>
+      </VStack>
+    </Flex>
+
   )
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Text, Button, Input } from '@chakra-ui/react';
+import { Text, Button, Input, Select, VStack, Stack, Wrap, WrapItem, Checkbox, Grid } from '@chakra-ui/react';
 
 const index = () => {
 
@@ -31,36 +31,68 @@ const index = () => {
 
   return (
     <>
-      <Text textAlign='center' m='5' fontSize='2xl'>
-        Hora de organizar suas tarefas
-      </Text>
-      <Input 
-        type='text' 
-        placeholder='Adicione uma tarefa' 
-        variant='flushed'
-        my='3' p='5'
-        value={userInput} 
-        onChange={handleChange} 
-      />
-      <Button
-        variant='outline'
-        mx='5' p='5' 
-        onClick={handleSubmit}
-      >
-        Adicionar</Button>
-      <ul>
-        {
-          todoList.length >= 1 ? todoList.map((todo, idx) => {
+      <VStack alignItems='center' spacing='6'>
+        <Text alignItems='center' textAlign='center' m='5' fontSize='2xl'>
+          Hora de organizar suas tarefas
+        </Text>
+        <Input
+          textAlign='center'
+          type='text'
+          placeholder='Adicione uma tarefa'
+          variant='flushed'
+          my='3' p='5'
+          value={userInput}
+          onChange={handleChange}
+        />
 
-            return <li key={idx}>{todo}<Button variant='outline'
-            mx='10' p='5' onClick={(e) => {
-              e.preventDefault()
-              handleDelete(todo)
-            }}>Apagar</Button></li>
-          })
-            : 'Registre uma tarefa'
-        }
-      </ul>
+        <Button
+          variant='outline'
+          mx='5' p='5'
+          onClick={handleSubmit}
+        >
+          Adicionar</Button>
+      </VStack>
+
+      <VStack alignItems='center' spacing='6' marginTop='6'>
+        <Stack direction='row' >
+          <Wrap>
+
+
+            <ul>
+              {
+                todoList.length >= 1 ? todoList.map((todo, idx) => {
+                  return <li key={idx}>{todo}
+                    <WrapItem alignItems='center' justifyContent='space-around'>
+                      <Button variant='outline' _hover={{
+                        bgColor: 'gray.50',
+                        color: 'brand.700'
+                      }}
+
+                        mx='10' p='5' onClick={(e) => {
+                          e.preventDefault()
+                          handleDelete(todo)
+                        }}>Apagar</Button>
+                    
+                   
+                      <Select mt='6' placeholder="Prioridade" size="md" variant="outline" mb='4' mr='2.5'>
+                        <option value="option1">Alta</option>
+                        <option value="option2">Média</option>
+                        <option value="option3">Grande</option>
+                      </Select>
+                      <Checkbox colorScheme="red">Concluído</Checkbox>
+                      </WrapItem>
+                    
+                  </li>
+
+                })
+                  : 'Registre uma tarefa'
+              }
+            </ul>
+
+
+          </Wrap>
+        </Stack>
+      </VStack>
 
     </>
   )
