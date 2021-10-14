@@ -1,28 +1,67 @@
+import React from 'react';
 import { useState } from 'react'
-import { Text, Button, Input, Select, VStack, Stack, Wrap, WrapItem, Checkbox, Grid } from '@chakra-ui/react';
+import { Text, Button, Input, VStack, Stack, Wrap, WrapItem, Checkbox } from '@chakra-ui/react';
+import { createTask, getAllTasks, deleteTask, updateTask } from './api/auth/api';
+
+// import { array } from 'yup';
+
 
 const index = () => {
 
-  const [userInput, setUserInput] = useState('')
+  const [error, setError] = useState("")
+  const [userInput, setUserInput] = useState("")
+  const [todoList, setTodoList] = useState("")
 
-  const [todoList, setTodoList] = useState([])
+  //  const [task, setTask] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const [checkedItems, setCheckedItems] = React.useState(false)
+  const [update, setUpdate] = React.useState(false)
 
-    setTodoList([
-      userInput,
-      ...todoList
-    ])
+  const handleUpdateTask = async (id) => {
+    setUpdate(true)
+    try {
+      await updateTask(
+        id,
+        userInput,
+        update
+        // values.name,
+        // values.description,
+        // values.priority,
+        // values.taskDone
+      );
+    } catch (err) {
+      setError(true)
+    }
+       
+    window.location.reload()
+  }
 
+  const handleSubmit = async (values) => {
+    try {
+      await createTask(
+        userInput
+        // values.name,
+        // values.description,
+        // values.priority,
+        // values.taskDone
+      );
+    } catch (err) {
+      setError(true)
+    }
+       
     setUserInput('')
+    window.location.reload()
   }
 
-  const handleDelete = (todo) => {
-    const updateArr = todoList.filter(todoItem => todoList.indexOf(todoItem) != todoList.indexOf(todo))
-    setTodoList(updateArr)
+  const handleDelete = async (id) => {
+    await deleteTask(id)
+    window.location.reload()
   }
-
+  if (!todoList) {
+    getAllTasks().then((res) => setTodoList(res));
+  }
+  const responseData = Array.from(todoList)
+  {console.log(userInput)}
   return (
     <>
       <VStack alignItems='center' spacing='6'>
@@ -41,13 +80,17 @@ const index = () => {
             setUserInput(e.target.value)
           }}
         />
+        <Checkbox size="lg" colorScheme="green" onChange={(e) => setCheckedItems(e.target.checked)}
+        >Filtrar as prioridades</Checkbox>
 
         <Button
           variant='outline'
           mx='5' p='5'
           onClick={handleSubmit}
+
         >
           Adicionar</Button>
+
       </VStack>
 
       <VStack alignItems='center' spacing='6' marginTop='6'>
@@ -57,8 +100,9 @@ const index = () => {
 
             <Stack direction='column' >
               {
-                todoList.length >= 1 ? todoList.map((todo, idx) => {
-                  return <li key={idx}>{todo}<Checkbox colorSchema='red' ml='5'>Concluído</Checkbox>
+                responseData.map((data) => {
+
+                  return <li key={data.id}>{data.name}{data.description}
                     <WrapItem alignItems='center' justifyContent='space-around'>
                       <Select mt='6' placeholder="Prioridade" size="md" variant="outline" mb='4' mr='2.5'>
                         <option value="option1">Alta</option>
@@ -72,17 +116,23 @@ const index = () => {
 
                         mx='10' p='5' onClick={(e) => {
                           e.preventDefault()
-                          handleDelete(todo)
+                           handleDelete(data.id)
                         }}>Apagar</Button>
-                    
-                   
-                      
-                      </WrapItem>
-                    
+
+                      <Checkbox onCheck={handleUpdateTask} size="md" colorScheme="green" mr='6'
+                      onChange={(e) => setCheckedItems(e.target.checked)}
+                      >É prioridade?</Checkbox>
+
+                      <Checkbox size="md" colorScheme="green"
+                      onChange={(e) => setCheckedItems(e.target.checked)}
+                      >Concluído?</Checkbox>
+
+                    </WrapItem>
+
                   </li>
 
                 })
-                  :  'Registre uma tarefa'
+                  // : 'Registre uma tarefa'
               }
             </Stack>
 
@@ -90,7 +140,6 @@ const index = () => {
           </Wrap>
       
       </VStack>
-
     </>
   )
 }
