@@ -40,7 +40,7 @@ export const login = async (userName, email, passwordHash) => {
     });
 }
 
-export const createTask = async(id, description) => {
+export const createTask = async(description) => {
   return await axios.post(baseUrl + '/api/v1/TaskController/CreateTask', {
     id,
     description

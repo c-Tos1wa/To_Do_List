@@ -7,12 +7,6 @@ const index = () => {
 
   const [todoList, setTodoList] = useState([])
 
-  const handleChange = (e) => {
-    e.preventDefault()
-
-    setUserInput(e.target.value)
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -42,7 +36,10 @@ const index = () => {
           variant='flushed'
           my='3' p='5'
           value={userInput}
-          onChange={handleChange}
+          onChange={(e) => {
+            e.preventDefault()
+            setUserInput(e.target.value)
+          }}
         />
 
         <Button
