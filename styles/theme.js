@@ -17,9 +17,9 @@ const colors = {
 }
 
 const fonts = {
-  heading: "Roboto Mono",
-  body: "Roboto Mono",
-  text: "Roboto Mono",
+  heading: "Roboto",
+  body: "Roboto",
+  text: "Roboto",
   sansSerif: 'Ubuntu'
 }
 

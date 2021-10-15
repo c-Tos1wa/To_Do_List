@@ -102,13 +102,10 @@ const index = () => {
               {
                 responseData.map((data) => {
 
-                  return <li key={data.id}>{data.name}{data.description}
+                  return <li key={data.id}>{data.name} { data.description}
                     <WrapItem alignItems='center' justifyContent='space-around'>
-                      <Select mt='6' placeholder="Prioridade" size="md" variant="outline" mb='4' mr='2.5'>
-                        <option value="option1">Alta</option>
-                        <option value="option2">Média</option>
-                        <option value="option3">Grande</option>
-                      </Select>
+                      
+                      
                       <Button variant='outline' _hover={{
                         bgColor: 'gray.50',
                         color: 'brand.700'
