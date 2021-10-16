@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from 'formik'
-import { Input, Text, VStack, Button, Flex } from '@chakra-ui/react'
+import { Input, Text, VStack, Button, Flex, Container } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { login } from "./api/auth/api";
 
@@ -12,9 +12,10 @@ export default function Login() {
   return (
 
 
-    <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' alignItems='center' justifyContent='center' minHeight='100vh'>
+    <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' 
+    alignItems='center' justifyContent='center' minHeight='100vh'>
 
-      <VStack justifyContent='center' alignItems='center' my='5' >
+      <VStack justifyContent='center' alignItems='center' my='5'>
         <Formik
           initialValues={{
             userName: '',
@@ -61,71 +62,79 @@ export default function Login() {
               handleSubmit(e)
             }}
             >
-              <VStack spacing='5' alignItems='center' justifyContent='center'>
-                <Text
+              <Flex>
+                <Container backgroundColor='white' alignItems='center'
+                  justifyContent='center' padding='20' borderRadius="md"
+                  align="stretch">
+                  <VStack alignItems='center'>
+                    <Text
+                      textAlign='center'
+                      fontSize='2xl'
+                      fontWeight='bold'
+                      textShadow='1px 1px #F0FFFF'
+                    >
+                      Faça seu Log in
+                    </Text>
 
-                  textAlign='center'
-                  fontSize='2xl'
-                  fontWeight='bold'
-                  textShadow='1px 1px #F0FFFF'
-                >
-                  Faça seu Log in
-                </Text>
+                    <Input
+                      mt='4' mb='4'
+                      focusBorderColor="lime"
+                      name='userName'
+                      type='text'
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.userName}
+                      placeholder='Digite seu nome de usuário'
+                      variant="outline"
+                      size='lg'
+                    />
+                    <Text>{errors.userName}</Text>
 
-                <Input
-                  focusBorderColor="lime"
-                  name='userName'
-                  type='text'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.userName}
-                  placeholder='Digite seu nome de usuário'
-                  variant="outline"
-                  size='lg'
-                />
-                <Text>{errors.userName}</Text>
+                    <Input
+                      mt='4' mb='4'
+                      focusBorderColor="lime"
+                      name='email'
+                      type='email'
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      placeholder='Digite seu email'
+                      variant="outline"
+                      size='lg'
+                    />
+                    <Text>{errors.email}</Text>
 
-                <Input
-                  focusBorderColor="lime"
-                  name='email'
-                  type='email'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  placeholder='Digite seu email'
-                  variant="outline"
-                  size='lg'
-                />
-                <Text>{errors.email}</Text>
+                    <Input
+                      mt='4' mb='4'
+                      focusBorderColor="lime"
+                      name='passwordHash'
+                      type='password'
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.passwordHash}
+                      placeholder='Digite uma senha'
+                      variant="outline"
+                      size='lg'
+                    />
+                    <Text>{errors.passwordHash}</Text>
 
-                <Input
-                  focusBorderColor="lime"
-                  name='passwordHash'
-                  type='password'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.passwordHash}
-                  placeholder='Digite uma senha'
-                  variant="outline"
-                  size='lg'
-                />
-                <Text>{errors.passwordHash}</Text>
+                    <Button
+                      type='submit'
+                      mt='5' p='3'
+                      bgColor='brand.700'
+                      color='gray.50'
+                      borderRadius='5'
+                      _hover={{
+                        bgColor: 'gray.50',
+                        color: 'brand.700'
+                      }}
+                    >
+                      LOG IN
+                    </Button>
 
-                <Button
-                  type='submit'
-                  mt='5' p='3'
-                  bgColor='brand.700'
-                  color='gray.50'
-                  borderRadius='5'
-                  _hover={{
-                    bgColor: 'gray.50',
-                    color: 'brand.700'
-                  }}
-                >
-                  LOG IN
-                </Button>
-
-              </VStack>
+                  </VStack>
+                </Container>
+              </Flex>
 
             </form>
           )}
