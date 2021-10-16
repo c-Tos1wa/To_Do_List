@@ -79,7 +79,6 @@ const index = () => {
             e.preventDefault()
             setUserInput(e.target.value)
           }}
-
         />
         <Checkbox size="lg" colorScheme="green" onChange={(e) => setCheckedItems(e.target.checked)}
         >Filtrar as prioridades</Checkbox>
@@ -95,16 +94,18 @@ const index = () => {
       </VStack>
 
       <VStack alignItems='center' spacing='6' marginTop='6'>
-        <Stack direction='row' >
+        
           <Wrap>
 
 
-            <ul>
+            <Stack direction='column' >
               {
                 responseData.map((data) => {
 
-                  return <li key={data.id}>{data.name}{data.description}
+                  return <li key={data.id}>{data.name} { data.description}
                     <WrapItem alignItems='center' justifyContent='space-around'>
+                      
+                      
                       <Button variant='outline' _hover={{
                         bgColor: 'gray.50',
                         color: 'brand.700'
@@ -130,11 +131,11 @@ const index = () => {
                 })
                   // : 'Registre uma tarefa'
               }
-            </ul>
+            </Stack>
 
 
           </Wrap>
-        </Stack>
+      
       </VStack>
     </>
   )

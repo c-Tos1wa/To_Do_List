@@ -107,4 +107,4 @@ export const updateTask = async (id, name, description, priority, taskDone) => {
     }
   }
   );
-};
+}; 
