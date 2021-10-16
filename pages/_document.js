@@ -9,7 +9,7 @@ class MyDocument extends Document {
         <Head>
           <meta content='IE=edge' httpEquiv="X-UA-Compatible" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
           <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
         </Head>
         <body>
