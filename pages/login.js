@@ -12,8 +12,8 @@ export default function Login() {
   return (
 
 
-    <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)' 
-    alignItems='center' justifyContent='center' minHeight='100vh'>
+    <Flex bgGradient='linear-gradient(90deg,#11AEEB, #35F39D)'
+      alignItems='center' justifyContent='center' minHeight='100vh'>
 
       <VStack justifyContent='center' alignItems='center' my='5'>
         <Formik
@@ -131,6 +131,10 @@ export default function Login() {
                     >
                       LOG IN
                     </Button>
+
+                    <Text>
+                      Se não tiver uma conta, clique <a href='./signUp'>aqui</a>
+                    </Text>
 
                   </VStack>
                 </Container>

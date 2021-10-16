@@ -90,7 +90,6 @@ export const deleteTask = async (id) => {
 // };
 
 export const updateTask = async (id, name, description, priority, taskDone) => {
-
    return await axios({
     method: "PUT",
     url: baseUrl + '/api/v1/TaskController/UpdateTask',
