@@ -79,8 +79,13 @@ const index = () => {
             setUserInput(e.target.value)
           }}
         />
-        <Checkbox size="lg" colorScheme="green" onChange={(e) => setCheckedItems(e.target.checked)}
-        >Filtrar as prioridades</Checkbox>
+        <Checkbox 
+          size="lg" 
+          colorScheme="green" 
+          onChange={(e) => setCheckedItems(e.target.checked)}
+        >
+          Filtrar as prioridades
+        </Checkbox>
 
         <Button
           variant='outline'
