@@ -1,10 +1,7 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Text, Button, Input, VStack, Stack, Wrap, WrapItem, Checkbox } from '@chakra-ui/react';
 import { createTask, getAllTasks, deleteTask, updateTask } from './api/auth/api';
-
-// import { array } from 'yup';
-
 
 const index = () => {
 
@@ -12,43 +9,44 @@ const index = () => {
   const [userInput, setUserInput] = useState("")
   const [todoList, setTodoList] = useState("")
 
-  //  const [task, setTask] = useState("")
-
   const [checkedItems, setCheckedItems] = React.useState(false)
+
   const [update, setUpdate] = React.useState(false)
 
-  const handleUpdateTask = async (id) => {
+  const [id, setId] = useState('')
+
+  const [description, setDescription] = useState('')
+  const [taskDone, setTaskDone] = useState(false)
+  console.log(id)
+  const handleUpdateTask = async (event) => {
+    event.preventDefault();
     setUpdate(true)
     try {
       await updateTask(
-        id,
         userInput,
-        update
-        // values.name,
-        // values.description,
-        // values.priority,
-        // values.taskDone
+        description,
+        checkedItems,
+        taskDone
       );
     } catch (err) {
       setError(true)
     }
-       
+
     window.location.reload()
+  }
+
+  const saveId = (props) => {
+    setId(props.id)
+    
   }
 
   const handleSubmit = async (values) => {
     try {
-      await createTask(
-        userInput
-        // values.name,
-        // values.description,
-        // values.priority,
-        // values.taskDone
-      );
+      await createTask(userInput);
     } catch (err) {
       setError(true)
     }
-       
+
     setUserInput('')
     window.location.reload()
   }
@@ -56,12 +54,13 @@ const index = () => {
   const handleDelete = async (id) => {
     await deleteTask(id)
     window.location.reload()
-  }
-  if (!todoList) {
-    getAllTasks().then((res) => setTodoList(res));
-  }
+  } 
+
+  useEffect( () => {
+    getAllTasks().then((res) => setTodoList(res))
+  }, [])
   const responseData = Array.from(todoList)
-  {console.log(userInput)}
+
   return (
     <>
       <VStack alignItems='center' spacing='6'>
@@ -87,55 +86,52 @@ const index = () => {
           variant='outline'
           mx='5' p='5'
           onClick={handleSubmit}
-
         >
           Adicionar</Button>
 
       </VStack>
 
       <VStack alignItems='center' spacing='6' marginTop='6'>
-        
-          <Wrap>
 
+        <Wrap>
 
-            <Stack direction='column' >
-              {
-                responseData.map((data) => {
+          <Stack direction='column' >
+            {
+              responseData.map((data) => {
 
-                  return <li key={data.id}>{data.name} { data.description}
-                    <WrapItem alignItems='center' justifyContent='space-around'>
-                      
-                      
-                      <Button variant='outline' _hover={{
-                        bgColor: 'gray.50',
-                        color: 'brand.700'
-                      }}
+                return <li key={data.id}>{data.name} {data.description}
+                  <WrapItem alignItems='center' justifyContent='space-around'>
 
-                        mx='10' p='5' onClick={(e) => {
-                          e.preventDefault()
-                           handleDelete(data.id)
-                        }}>Apagar</Button>
+                    <Button variant='outline' _hover={{
+                      bgColor: 'gray.50',
+                      color: 'brand.700'
+                    }}
 
-                      <Checkbox onCheck={handleUpdateTask} size="md" colorScheme="green" mr='6'
-                      onChange={(e) => setCheckedItems(e.target.checked)}
-                      >É prioridade?</Checkbox>
+                      mx='10' p='5' onClick={(e) => {
+                        e.preventDefault()
+                        handleDelete(data.id)
+                      }}>Apagar</Button>
 
-                      <Checkbox size="md" colorScheme="green"
-                      onChange={(e) => setCheckedItems(e.target.checked)}
-                      >Concluído?</Checkbox>
+                   <Checkbox size="md" colorScheme="green" mr='6'
+                     onChange={(e) => setCheckedItems(e.target.checked)}  onClick={() => handleUpdateTask && saveId({id:data.id})}  
+                     
+                     >É prioridade?</Checkbox> 
+                     
 
-                    </WrapItem>
+                    <Checkbox size="md" colorScheme="green"
+                      onChange={(e) => setCheckedItems(e.target.checked)} onClick={handleUpdateTask}
+                    >Concluído?</Checkbox>
 
-                  </li>
+                  </WrapItem>
 
-                })
-                  // : 'Registre uma tarefa'
-              }
-            </Stack>
+                </li>
 
+              })
+            }
+          </Stack>
 
-          </Wrap>
-      
+        </Wrap>
+
       </VStack>
     </>
   )
