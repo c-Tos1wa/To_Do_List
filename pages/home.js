@@ -1,9 +1,8 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Text, Button, Input, VStack, Stack, Wrap, WrapItem, Checkbox } from '@chakra-ui/react';
 import { createTask, getAllTasks, deleteTask, updateTask } from './api/auth/api';
 
-// import { array } from 'yup';
 
 
 const index = () => {
@@ -57,11 +56,21 @@ const index = () => {
     await deleteTask(id)
     window.location.reload()
   }
+  
+  useEffect( () => {
+    getAllTasks().then( res => setTodoList(res))
+    //setData(responseData)
+  }, [])
+  const responseData = Array.from(todoList)
+
+  /*
   if (!todoList) {
     getAllTasks().then((res) => setTodoList(res));
   }
   const responseData = Array.from(todoList)
-  {console.log(userInput)}
+  */
+  
+
   return (
     <>
       <VStack alignItems='center' spacing='6'>
@@ -80,8 +89,13 @@ const index = () => {
             setUserInput(e.target.value)
           }}
         />
-        <Checkbox size="lg" colorScheme="green" onChange={(e) => setCheckedItems(e.target.checked)}
-        >Filtrar as prioridades</Checkbox>
+        <Checkbox 
+          size="lg" 
+          colorScheme="green" 
+          onChange={(e) => setCheckedItems(e.target.checked)}
+        >
+          Filtrar as prioridades
+        </Checkbox>
 
         <Button
           variant='outline'
@@ -114,7 +128,9 @@ const index = () => {
                         mx='10' p='5' onClick={(e) => {
                           e.preventDefault()
                            handleDelete(data.id)
-                        }}>Apagar</Button>
+                        }}>
+                          Apagar
+                        </Button>
 
                       <Checkbox onCheck={handleUpdateTask} size="md" colorScheme="green" mr='6'
                       onChange={(e) => setCheckedItems(e.target.checked)}
