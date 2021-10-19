@@ -21,8 +21,9 @@ const index = () => {
     try {
       await updateTask(
         id,
-        userInput,
-        update
+        priority,
+        taskDone
+        //update
         // values.name,
         // values.description,
         // values.priority,
@@ -39,10 +40,7 @@ const index = () => {
     try {
       await createTask(
         userInput
-        // values.name,
-        // values.description,
-        // values.priority,
-        // values.taskDone
+
       );
     } catch (err) {
       setError(true)
@@ -62,14 +60,8 @@ const index = () => {
     //setData(responseData)
   }, [])
   const responseData = Array.from(todoList)
-
-  /*
-  if (!todoList) {
-    getAllTasks().then((res) => setTodoList(res));
-  }
-  const responseData = Array.from(todoList)
-  */
   
+  //console.log(id)
 
   return (
     <>
@@ -132,7 +124,7 @@ const index = () => {
                           Apagar
                         </Button>
 
-                      <Checkbox onCheck={handleUpdateTask} size="md" colorScheme="green" mr='6'
+                      <Checkbox onClick={handleUpdateTask} size="md" colorScheme="green" mr='6'
                       onChange={(e) => setCheckedItems(e.target.checked)}
                       >É prioridade?</Checkbox>
 
