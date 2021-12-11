@@ -36,18 +36,18 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/c-Tos1wa">
-        <img src="https://avatars.githubusercontent.com/u/81439003?v=4" width="100px;" /><br>
-        <sub>
-          <b>Cristina Iwassaki</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
       <a href="https://github.com/bernaRocha">
         <img src="https://avatars.githubusercontent.com/u/71238351?v=4" width="100px;" /><br>
         <sub>
           <b>Bernardo Rocha</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/c-Tos1wa">
+        <img src="https://avatars.githubusercontent.com/u/81439003?v=4" width="100px;" /><br>
+        <sub>
+          <b>Cristina Iwassaki</b>
         </sub>
       </a>
     </td>

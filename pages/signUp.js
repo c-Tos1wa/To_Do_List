@@ -172,7 +172,7 @@ export default function SignUp() {
                     >
                       CRIAR
                     </Button>
-
+                     
                     <Text>
                       Se tiver uma conta, clique <a href='./login'>aqui</a>
                     </Text>
