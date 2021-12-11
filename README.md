@@ -35,7 +35,6 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 <table>
   <tr>
-
     <td align="center">
       <a href="https://github.com/bernaRocha">
         <img src="https://avatars.githubusercontent.com/u/71238351?v=4" width="100px;" /><br>
